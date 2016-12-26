@@ -1,16 +1,8 @@
-from src.generator import generate_question
+from app.generator import generate_question
+from app.settings import DATA
 
 def main():
-    data = {
-        'page': 1,
-        'pagesize': 10,
-        'order' : 'desc',
-        'sort': 'votes',
-        'tagged': 'python',
-        'site': 'stackoverflow'
-        }
-    url = 'https://api.stackexchange.com/2.2/questions'
-    generate_question(url, data)
+    generate_question(DATA)
 
 if __name__ == '__main__':
     main()
