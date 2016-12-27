@@ -1,6 +1,7 @@
 import random
 
 import requests
+from colorama import Fore, Back, Style
 
 from .question import Question
 from .settings import URL
@@ -10,6 +11,12 @@ def request_site(data):
     response = requests.get(URL, data=data)
     return response.json()
 
+def format(question):
+    print(Fore.CYAN + Style.BRIGHT + "Q: " + Fore.RED + Style.BRIGHT + question.title)
+    print(Fore.YELLOW + "tags: " + ', '.join(question.tags))
+    print(Fore.MAGENTA + "OP: " + question.owner_name)
+    print(Fore.GREEN + "Read the discussion :" + question.link)
+
 def generate_question(data):
     """
     data : list of strings 
@@ -17,7 +24,7 @@ def generate_question(data):
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
     question = Question.from_id(question_id)
-    print(question.title)
+    format(question)
  
 def get_ids(data):
     temp_ids = []
