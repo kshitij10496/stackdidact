@@ -1,5 +1,5 @@
-from app.generator import generate_question
-from app.settings import DATA
+from stackdidact.generator import generate_question
+from stackdidact.settings import DATA
 
 def main():
     generate_question(DATA)

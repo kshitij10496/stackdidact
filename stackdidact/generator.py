@@ -1,11 +1,24 @@
 import random
+import json
 
 import requests
 from colorama import Fore, Back, Style
 
 from .question import Question
 from .settings import URL
-ids = [] # store the ids of the questions already displayed
+
+try:
+    with open('id_data.json', 'r') as fp:
+        id_data = json.load(fp)
+except FileNotFoundError:
+    with open('id_data.json', 'w') as fp:
+        id_data = {
+                'yes': [],
+                'no': []
+        }
+        json.dump(id_data, fp)
+
+ids = id_data['yes'] # store the ids of the questions already displayed
 
 def request_site(data):
     response = requests.get(URL, data=data)
@@ -23,6 +36,11 @@ def generate_question(data):
     """
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
+    temp_ids.remove(question_id)
+    id_data['no'] += temp_ids
+    with open('id_data.json', 'w') as fp:
+        json.dump(id_data, fp)
+
     question = Question.from_id(question_id)
     format(question)
  
