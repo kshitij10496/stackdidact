@@ -5,13 +5,16 @@ import requests
 from colorama import Fore, Back, Style
 
 from .question import Question
-from .settings import URL
+from .settings import URL, BASE_DIR
+
+path = BASE_DIR + '/id_data.json'
 
 try:
-    with open('id_data.json', 'r') as fp:
+    with open(path, 'r') as fp:
         id_data = json.load(fp)
+
 except FileNotFoundError:
-    with open('id_data.json', 'w') as fp:
+    with open(path, 'w') as fp:
         id_data = {
                 'yes': [],
                 'no': []
@@ -38,7 +41,7 @@ def generate_question(data):
     question_id = logic(temp_ids, data)
     temp_ids.remove(question_id)
     id_data['no'] += temp_ids
-    with open('id_data.json', 'w') as fp:
+    with open(path, 'w') as fp:
         json.dump(id_data, fp)
 
     question = Question.from_id(question_id)
