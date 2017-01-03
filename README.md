@@ -3,7 +3,7 @@ Fresh Questions from Stack Exchange family for those who want to learn something
 
 ## What is `stackdidact` ?
 `stackdidact` is primarily supposed to be a shell command to generate a question from [StackOverflow](http://stackoverflow.com) (and the [StackExchange](http://stackexchange.com/sites) family, in general).
-The interesting part is that each time this a **new** question is displayed.   
+The interesting part is that each time this a **new** question is displayed.
 
 ## Motivation for `stackdidact` ?
 
@@ -19,7 +19,16 @@ Also, if you are an "autodidact" programmer or atleast aspire to be one, this co
 - Export the `cmd.py` using the `stackdiadact` alias either by adding the line below to your `.bashrc` or `.bash_aliases`:
 `alias stackdidact="python3 path/to/stackdidact/cmd.py"`
 - Restart your terminal emulator or start a new shell.
-- Type `stackdidact`.
+
+## Running
+
+- Just type `stackdidact` on cmdline. Optionally, you can also pass in a language extension and a browser shorthand name `['fox', 'ggl']` to open the question in a browser, like:
+```bash
+stackdidact py fox
+```
+where:
+`py` - questions tagged as `python` and `fox` - Firefox browser
+
 
 ![Preview Image](https://github.com/kshitij10496/stackdidact/blob/master/preview.png)
 If you face any issues with the installation, discuss it by creating an issue.

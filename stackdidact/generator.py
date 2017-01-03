@@ -1,11 +1,12 @@
 import random
 import json
+import webbrowser
 
 import requests
 from colorama import Fore, Back, Style
 
 from .question import Question
-from .settings import URL
+from .settings import URL, USER_AGENT
 
 try:
     with open('id_data.json', 'r') as fp:
@@ -24,13 +25,19 @@ def request_site(data):
     response = requests.get(URL, data=data)
     return response.json()
 
-def format(question):
+def format(question, browser):
     print(Fore.CYAN + Style.BRIGHT + "Q: " + Fore.RED + Style.BRIGHT + question.title)
     print(Fore.YELLOW + "tags: " + ', '.join(question.tags))
     print(Fore.MAGENTA + "OP: " + question.owner_name)
     print(Fore.GREEN + "Read the discussion :" + question.link)
+    if browser:
+        try:
+            b = webbrowser.get(USER_AGENT.get(browser))
+            b.open(question.link)
+        except:
+            pass
 
-def generate_question(data):
+def generate_question(data, args):
     """
     data : list of strings 
     """
@@ -42,7 +49,7 @@ def generate_question(data):
         json.dump(id_data, fp)
 
     question = Question.from_id(question_id)
-    format(question)
+    format(question, args)
  
 def get_ids(data):
     temp_ids = []
