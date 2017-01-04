@@ -4,6 +4,7 @@ import requests
 
 from settings import URL, SITE
 
+
 class Question:
 
     def __init__(self, tags, owner_name, question_id, title, link):
@@ -24,7 +25,7 @@ class Question:
     def from_id(cls, question_id):
         main_url = URL + '/' + str(question_id)
         data = {
-            'site' : SITE,
+            'site': SITE,
             }
         response = requests.get(main_url, data=data).json()
         question_body = response['items'][0]

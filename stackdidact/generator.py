@@ -20,11 +20,13 @@ except FileNotFoundError:
         }
         json.dump(id_data, fp)
 
-ids = id_data['yes'] # store the ids of the questions already displayed
+ids = id_data['yes']  # store the ids of the questions already displayed
+
 
 def request_site(data):
     response = requests.get(URL, data=data)
     return response.json()
+
 
 def format(question):
     print(Fore.CYAN + Style.BRIGHT + "Q: " + Fore.RED + Style.BRIGHT + question.title)
@@ -32,9 +34,10 @@ def format(question):
     print(Fore.MAGENTA + "OP: " + question.owner_name)
     print(Fore.GREEN + "Read the discussion :" + question.link)
 
+
 def generate_question(data):
     """
-    data : list of strings 
+    data : list of strings
     """
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
@@ -45,21 +48,23 @@ def generate_question(data):
 
     question = Question.from_id(question_id)
     return question
- 
+
+
 def get_ids(data):
     temp_ids = []
     response = request_site(data)
     question_set = response["items"]
     for question in question_set:
         temp_ids.append(question["question_id"])
-    
+
     return temp_ids
+
 
 def logic(temp_ids, data):
     """ Generate random question_id from list of ids.
     """
     question_id = random.choice(temp_ids)
-    if not question_id in ids:
+    if question_id not in ids:
         ids.append(question_id)
         return question_id
 
@@ -68,9 +73,9 @@ def logic(temp_ids, data):
         if len(ids) >= data['page'] * data['pagesize']:
             data['page'] += 1
 
-        new_temp_ids = get_ids(data) 
+        new_temp_ids = get_ids(data)
         return logic(new_temp_ids, data, URL)
-    
+
     else:
         new_temp_ids = temp_ids.remove(question_id)
         return logic(new_temp_ids, data)
