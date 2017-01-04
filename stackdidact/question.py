@@ -2,8 +2,7 @@ import html
 
 import requests
 
-from settings import URL, SITE
-
+from .settings import URL, SITE
 
 class Question:
 
@@ -14,18 +13,11 @@ class Question:
         self.title = title
         self.link = link
 
-    def __str__(self):
-        title = "Q: " + self.title
-        tags = "tags: " + ', '.join(self.tags)
-        owner_name = "OP: " + self.owner_name
-        link = "Read the discussion :" + self.link
-        return "\n".join([title, tags, owner_name, link])
-
     @classmethod
     def from_id(cls, question_id):
         main_url = URL + '/' + str(question_id)
         data = {
-            'site': SITE,
+            'site' : SITE,
             }
         response = requests.get(main_url, data=data).json()
         question_body = response['items'][0]
