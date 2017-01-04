@@ -2,10 +2,9 @@ import random
 import json
 
 import requests
-from colorama import Fore, Back, Style
 
-from .question import Question
-from .settings import URL, BASE_DIR
+from question import Question
+from settings import URL, BASE_DIR
 
 path = BASE_DIR + '/id_data.json'
 
@@ -45,7 +44,7 @@ def generate_question(data):
         json.dump(id_data, fp)
 
     question = Question.from_id(question_id)
-    format(question)
+    return question
  
 def get_ids(data):
     temp_ids = []
