@@ -9,8 +9,7 @@ from settings import DATA
 def main_cli(tag):
     DATA['tagged'] = tag
     question = generate_question(DATA)
-    click.echo(question)
-
+    click.echo(question.color_format())
 
 if __name__ == "__main__":
     main_cli()

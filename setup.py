@@ -84,7 +84,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'stackdidact = stackdidact.main_cli:cli',
+            'stackdidact=stackdidact.cli:main_cli',
         ],
     },
 )
