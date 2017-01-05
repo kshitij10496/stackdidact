@@ -34,7 +34,6 @@ wheels/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-id_data.json
 
 # Unit test / coverage reports
 htmlcov/
@@ -90,3 +89,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Runtime json file
+id_data.json

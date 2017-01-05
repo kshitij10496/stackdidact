@@ -22,13 +22,7 @@ Also, if you are an "autodidact" programmer or atleast aspire to be one, this co
 
 ## Running
 
-- Just type `stackdidact` on cmdline. Optionally, you can also pass in a language extension and a browser shorthand name `['fox', 'ggl']` to open the question in a browser, like:
-```bash
-stackdidact py fox
-```
-where:
-`py` - questions tagged as `python` and `fox` - Firefox browser
-
+- Just type `stackdidact` on cmdline. Optionally, you can also pass in a `--tag <tag name>` argument to browse by your topic of choice.
 
 ![Preview Image](https://github.com/kshitij10496/stackdidact/blob/master/preview.png)
 If you face any issues with the installation, discuss it by creating an issue.

@@ -1,26 +1,19 @@
+import os
+
 URL = 'https://api.stackexchange.com/2.2/questions'
 SITE = 'stackoverflow'
+DEFAULT_TAG = 'python'
 
-LANG_TAGS = {
-	'c': 'c',
-	'py': 'python',
-	'java': 'java',
-	'hs': 'haskell',
-	'rb': 'ruby',
-	'rs': 'rust'
-}
+# This is consulted for opening the question in user's browser
+USER_AGENT = 'firefox'
 
- # If a second arg is provided, this options will used to open the question in browser
-USER_AGENT = {
-'fox':'firefox',
-'ggl': 'chromium'
-}
-
-DATA = {
+QUERY_PARAMS = {
         'page': 1,
-        'pagesize': 30, # mentioning the default value for completeness
-        'order' : 'desc',
+        'pagesize': 30,  # mentioning the default value for completeness
+        'order': 'desc',
         'sort': 'votes',
-        'tagged': 'python', # Searches for questions using this tag; searches for python questions by default
+        'tagged': DEFAULT_TAG, # Searches for questions using this tag; searches for python questions by default
         'site': SITE # search website in the Stack Exchange family
     }
+PATH = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.split(PATH)[0]

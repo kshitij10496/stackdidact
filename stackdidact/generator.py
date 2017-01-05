@@ -1,70 +1,67 @@
 import random
 import json
-import webbrowser
 
 import requests
+import webbrowser
+
 from colorama import Fore, Back, Style
 
-from .question import Question
-from .settings import URL, USER_AGENT
+from question import Question
+from settings import URL, BASE_DIR, USER_AGENT
+
+path = BASE_DIR + '/id_data.json'
 
 try:
-    with open('id_data.json', 'r') as fp:
+    with open(path, 'r') as fp:
         id_data = json.load(fp)
+
 except FileNotFoundError:
-    with open('id_data.json', 'w') as fp:
+    with open(path, 'w') as fp:
         id_data = {
                 'yes': [],
                 'no': []
         }
         json.dump(id_data, fp)
 
-ids = id_data['yes'] # store the ids of the questions already displayed
+ids = id_data['yes']  # store the ids of the questions already displayed
 
 def request_site(data):
     response = requests.get(URL, data=data)
     return response.json()
 
-def format(question, browser):
+def colorize(question):
     print(Fore.CYAN + Style.BRIGHT + "Q: " + Fore.RED + Style.BRIGHT + question.title)
     print(Fore.YELLOW + "tags: " + ', '.join(question.tags))
     print(Fore.MAGENTA + "OP: " + question.owner_name)
     print(Fore.GREEN + "Read the discussion :" + question.link)
-    if browser:
-        try:
-            b = webbrowser.get(USER_AGENT.get(browser))
-            b.open(question.link)
-        except:
-            pass
 
-def generate_question(data, args):
+def generate_question(data):
     """
-    data : list of strings 
+    data : get request parameters
     """
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
     temp_ids.remove(question_id)
     id_data['no'] += temp_ids
-    with open('id_data.json', 'w') as fp:
+    with open(path, 'w') as fp:
         json.dump(id_data, fp)
 
     question = Question.from_id(question_id)
-    format(question, args)
- 
+    return question
+
 def get_ids(data):
     temp_ids = []
     response = request_site(data)
     question_set = response["items"]
     for question in question_set:
         temp_ids.append(question["question_id"])
-    
     return temp_ids
 
 def logic(temp_ids, data):
     """ Generate random question_id from list of ids.
     """
     question_id = random.choice(temp_ids)
-    if not question_id in ids:
+    if question_id not in ids:
         ids.append(question_id)
         return question_id
 
@@ -73,9 +70,16 @@ def logic(temp_ids, data):
         if len(ids) >= data['page'] * data['pagesize']:
             data['page'] += 1
 
-        new_temp_ids = get_ids(data) 
+        new_temp_ids = get_ids(data)
         return logic(new_temp_ids, data, URL)
-    
+
     else:
         new_temp_ids = temp_ids.remove(question_id)
         return logic(new_temp_ids, data)
+
+def open_in_browser(browser, link):
+    try:
+        b = webbrowser.get(browser)
+        b.open(link)
+    except:
+        pass
