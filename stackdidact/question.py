@@ -2,7 +2,7 @@ import click
 import html
 import requests
 
-from settings import URL, SITE
+from .settings import URL, SITE
 
 
 class Question:

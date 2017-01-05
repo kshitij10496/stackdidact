@@ -3,8 +3,8 @@ import json
 
 import requests
 
-from question import Question
-from settings import URL, BASE_DIR
+from .question import Question
+from .settings import URL, BASE_DIR
 
 path = BASE_DIR + '/id_data.json'
 
