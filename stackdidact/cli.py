@@ -1,7 +1,7 @@
 import click
 
-from generator import generate_question
-from settings import DATA
+from .generator import generate_question
+from .settings import DATA
 
 
 @click.command()
