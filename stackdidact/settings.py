@@ -1,5 +1,7 @@
 import os
 
+import requests
+
 URL = 'https://api.stackexchange.com/2.2/questions'
 SITE = 'stackoverflow'
 TAG = 'python'
@@ -13,3 +15,13 @@ DATA = {
     }
 PATH = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.split(PATH)[0]
+
+
+def get_all_sites():
+    all_sites = []
+    r = requests.get('https://api.stackexchange.com/2.2/sites', {"pagesize": 400})
+    for item in r.json()["items"]:
+        all_sites.append(item["api_site_parameter"])
+    return all_sites
+
+ALL_SITES = get_all_sites()
