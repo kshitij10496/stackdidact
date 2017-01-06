@@ -33,7 +33,7 @@ def request_site(data):
 
 def generate_question(data):
     """
-    data : get request parameters
+    data : GET request parameters
     """
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
