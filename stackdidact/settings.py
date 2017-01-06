@@ -1,18 +1,19 @@
 import os
 
+# Set a predefined list of browser if the user hasn't defined them already
+predefined_agents = os.pathsep.join(['firefox','google-chrome', 'lynx', 'w3m', 'opera', 'macosx', 'safari'])
+_ = os.environ.setdefault('BROWSER', predefined_agents)
+
 URL = 'https://api.stackexchange.com/2.2/questions'
 SITE = 'stackoverflow'
 DEFAULT_TAG = 'python'
-
-# This is consulted for opening the question in user's browser
-USER_AGENT = 'firefox'
 
 QUERY_PARAMS = {
         'page': 1,
         'pagesize': 30,  # mentioning the default value for completeness
         'order': 'desc',
         'sort': 'votes',
-        'tagged': DEFAULT_TAG, # Searches for questions using this tag; searches for python questions by default
+        'tagged': DEFAULT_TAG,
         'site': SITE # search website in the Stack Exchange family
     }
 PATH = os.path.dirname(os.path.abspath(__file__))

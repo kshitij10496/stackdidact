@@ -19,10 +19,7 @@ Also, if you are an "autodidact" programmer or atleast aspire to be one, this co
 - Export the `cmd.py` using the `stackdiadact` alias either by adding the line below to your `.bashrc` or `.bash_aliases`:
 `alias stackdidact="python3 path/to/stackdidact/cmd.py"`
 - Restart your terminal emulator or start a new shell.
-
-## Running
-
-- Just type `stackdidact` on cmdline. Optionally, you can also pass in a `--tag <tag name>` argument to browse by your topic of choice.
+- Type `stackdidact`.
 
 ![Preview Image](https://github.com/kshitij10496/stackdidact/blob/master/preview.png)
 If you face any issues with the installation, discuss it by creating an issue.

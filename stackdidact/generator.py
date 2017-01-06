@@ -3,11 +3,11 @@ import json
 
 import requests
 import webbrowser
+import warnings
 
-from colorama import Fore, Back, Style
+from .question import Question
+from .settings import URL, BASE_DIR
 
-from question import Question
-from settings import URL, BASE_DIR, USER_AGENT
 
 path = BASE_DIR + '/id_data.json'
 
@@ -25,15 +25,11 @@ except FileNotFoundError:
 
 ids = id_data['yes']  # store the ids of the questions already displayed
 
+
 def request_site(data):
     response = requests.get(URL, data=data)
     return response.json()
 
-def colorize(question):
-    print(Fore.CYAN + Style.BRIGHT + "Q: " + Fore.RED + Style.BRIGHT + question.title)
-    print(Fore.YELLOW + "tags: " + ', '.join(question.tags))
-    print(Fore.MAGENTA + "OP: " + question.owner_name)
-    print(Fore.GREEN + "Read the discussion :" + question.link)
 
 def generate_question(data):
     """
@@ -49,6 +45,7 @@ def generate_question(data):
     question = Question.from_id(question_id)
     return question
 
+
 def get_ids(data):
     temp_ids = []
     response = request_site(data)
@@ -56,6 +53,7 @@ def get_ids(data):
     for question in question_set:
         temp_ids.append(question["question_id"])
     return temp_ids
+
 
 def logic(temp_ids, data):
     """ Generate random question_id from list of ids.
@@ -77,9 +75,9 @@ def logic(temp_ids, data):
         new_temp_ids = temp_ids.remove(question_id)
         return logic(new_temp_ids, data)
 
-def open_in_browser(browser, link):
+
+def open_in_browser(link):
     try:
-        b = webbrowser.get(browser)
-        b.open(link)
+        webbrowser.open(link)
     except:
-        pass
+        warning.warn('Could not find a default browser')
