@@ -2,9 +2,12 @@ import random
 import json
 
 import requests
+import webbrowser
+import warnings
 
 from .question import Question
 from .settings import URL, BASE_DIR
+
 
 path = BASE_DIR + '/id_data.json'
 
@@ -30,7 +33,7 @@ def request_site(data):
 
 def generate_question(data):
     """
-    data : list of strings
+    data : GET request parameters
     """
     temp_ids = get_ids(data)
     question_id = logic(temp_ids, data)
@@ -49,7 +52,6 @@ def get_ids(data):
     question_set = response["items"]
     for question in question_set:
         temp_ids.append(question["question_id"])
-
     return temp_ids
 
 
@@ -72,3 +74,10 @@ def logic(temp_ids, data):
     else:
         new_temp_ids = temp_ids.remove(question_id)
         return logic(new_temp_ids, data)
+
+
+def open_in_browser(link):
+    try:
+        webbrowser.open(link)
+    except:
+        warning.warn('Could not find a default browser')

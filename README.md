@@ -3,7 +3,7 @@ Fresh Questions from Stack Exchange family for those who want to learn something
 
 ## What is `stackdidact` ?
 `stackdidact` is primarily supposed to be a shell command to generate a question from [StackOverflow](http://stackoverflow.com) (and the [StackExchange](http://stackexchange.com/sites) family, in general).
-The interesting part is that each time this a **new** question is displayed.   
+The interesting part is that each time this a **new** question is displayed.
 
 ## Why `stackdidact` ?
 
