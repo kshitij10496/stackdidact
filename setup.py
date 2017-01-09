@@ -30,7 +30,7 @@ setup(
 
     # The project's main homepage.
     url='https://github.com/kshitij10496/stackdidact',
-    download_url='https://github.com/kshitij10496/stackdidact/archive/v1.1.0.tar.gz'
+    download_url='https://github.com/kshitij10496/stackdidact/archive/v1.1.0.tar.gz',
 
     # Author details
     author='Kshitij Saraogi',
