@@ -1,12 +1,13 @@
 import random
 import json
+import os
 
 import requests
 
 from .question import Question
-from .settings import URL, BASE_DIR
+from .settings import URL
 
-path = BASE_DIR + '/id_data.json'
+path = os.path.expanduser('~') + '/.stackdidact.json'
 
 try:
     with open(path, 'r') as fp:

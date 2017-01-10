@@ -13,9 +13,6 @@ DATA = {
         'tagged': TAG,  # Searches for questions using this tag
         'site': SITE  # search website in the Stack Exchange family
     }
-PATH = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.split(PATH)[0]
-
 
 def get_all_sites():
     all_sites = []
