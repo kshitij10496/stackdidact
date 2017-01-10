@@ -15,10 +15,11 @@ DATA = {
     }
 
 def get_all_sites():
-    all_sites = []
+    all_sites = {}
     r = requests.get('https://api.stackexchange.com/2.2/sites', {"pagesize": 400})
     for item in r.json()["items"]:
-        all_sites.append(item["api_site_parameter"])
+        all_sites[item["api_site_parameter"]] = item["name"]
+
     return all_sites
 
 ALL_SITES = get_all_sites()
